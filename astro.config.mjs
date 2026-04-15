@@ -1,5 +1,3 @@
-import mdx from "@astrojs/mdx";
-import sitemap, { ChangeFreqEnum } from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
@@ -7,33 +5,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: "https://reshi.me",
-  integrations: [
-    mdx(),
-    sitemap({
-      filter: (page) => !page.includes("/rss.xml"),
-      serialize(item) {
-        if (item.url === "https://reshi.me/") {
-          item.changefreq = ChangeFreqEnum.WEEKLY;
-          item.priority = 0.9;
-          item.lastmod = new Date().toISOString();
-          return item;
-        }
-        if (item.url === "https://reshi.me/post/") {
-          item.changefreq = ChangeFreqEnum.WEEKLY;
-          item.priority = 0.7;
-          return item;
-        }
-        if (item.url.includes("/post/")) {
-          item.changefreq = ChangeFreqEnum.MONTHLY;
-          item.priority = 0.8;
-          return item;
-        }
-        item.changefreq = ChangeFreqEnum.MONTHLY;
-        item.priority = 0.5;
-        return item;
-      },
-    }),
-  ],
+  integrations: [],
 
   vite: {
     plugins: [tailwindcss()],

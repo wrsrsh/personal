@@ -8,10 +8,7 @@
   --color-text: #000;
   --color-heading: #424242;
   --color-link: #0559ed;
-  --color-code-bg: #f2f2f2;
-  --color-code: #222;
   --color-muted: #666;
-  --color-border: #e5e5e5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,10 +17,7 @@
     --color-text: #fff;
     --color-heading: #fff;
     --color-link: #6ea8fe;
-    --color-code-bg: #1e1e1e;
-    --color-code: #d4d4d4;
     --color-muted: #999;
-    --color-border: #333;
   }
 }
 
@@ -65,16 +59,6 @@
     transition-delay: var(--reveal-delay, 0ms);
   }
 
-  html {
-    --shadow-bar-color: rgb(64, 64, 64);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    html {
-      --shadow-bar-color: rgb(180, 180, 180);
-    }
-  }
-
   h1,
   h2,
   h3,
@@ -89,7 +73,7 @@
   }
 
   a:hover {
-    @apply underline;
+    @apply underline underline-offset-4;
   }
 
   a {
@@ -107,92 +91,12 @@
     @apply text-[var(--color-heading)];
   }
 
-  time {
-    @apply font-mono text-sm;
-  }
-
-  hr {
-    @apply border-0 border-t-1 border-dashed border-[var(--color-border)];
-  }
-
-  code {
-    @apply font-mono text-sm bg-[var(--color-code-bg)] text-[var(--color-code)] rounded-md p-1;
-  }
-
-  blockquote {
-    @apply border-l-1 border-[var(--color-border)] pl-4 italic;
-  }
-
-  /* Prose styles for blog posts */
   .prose {
     @apply leading-5.5;
   }
 
   .prose p {
     @apply mb-6;
-  }
-
-  .prose h2 {
-    @apply text-2xl mt-8 mb-4 font-semibold text-[var(--color-heading)];
-  }
-
-  .prose h3 {
-    @apply text-lg mt-6 mb-3 text-[var(--color-heading)];
-  }
-
-  .prose ul,
-  .prose ol {
-    @apply my-4 pl-6;
-  }
-
-  .prose li {
-    @apply mb-2 list-disc;
-  }
-
-  .prose pre {
-    @apply bg-[var(--color-code-bg)] p-4.5 rounded-xl overflow-x-auto mb-10;
-  }
-
-  .prose pre code {
-    @apply bg-transparent p-0;
-  }
-
-  .prose blockquote {
-    @apply my-6 border-l-2 border-[var(--color-border)] pl-4;
-  }
-
-  .prose img {
-    @apply max-w-full my-6;
-  }
-
-  .prose hr {
-    @apply my-8;
-  }
-
-  .motion-lift {
-    transition: transform var(--motion-duration-fast) var(--motion-ease-out);
-  }
-
-  .motion-lift:hover {
-    transform: translateY(-1px);
-  }
-
-  @view-transition {
-    navigation: auto;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: var(--motion-duration-slow);
-    animation-timing-function: var(--motion-ease-out);
-  }
-
-  ::view-transition-old(root) {
-    opacity: 1;
-  }
-
-  ::view-transition-new(root) {
-    opacity: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -1,17 +1,13 @@
 ---
 import BaseHead from "./BaseHead.astro";
-import { ClientRouter } from "astro:transitions";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { cn } from "@sglara/cn";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   type?: 'website' | 'article';
-  pubDate?: Date;
-  updatedDate?: Date;
-  pageType?: 'home' | 'blog-post' | 'blog-list' | 'default';
+  pageType?: 'home' | 'default';
 }
 
 const {
@@ -19,23 +15,15 @@ const {
   description = SITE_DESCRIPTION,
   image,
   type,
-  pubDate,
-  updatedDate,
   pageType,
 } = Astro.props;
-
-const currentPath = Astro.url.pathname;
-
-const linkClass = (path: string) =>
-  cn("underline-offset-4", path === "/" ? currentPath === path && "underline" : currentPath.startsWith(path) && "underline");
 ---
 
 <!doctype html>
 <html lang="en"
   class="shadow-none ">
   <head>
-    <BaseHead title={title} description={description} image={image} type={type} pubDate={pubDate} updatedDate={updatedDate} pageType={pageType} />
-    <ClientRouter />
+    <BaseHead title={title} description={description} image={image} type={type} pageType={pageType} />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css"
@@ -43,94 +31,11 @@ const linkClass = (path: string) =>
       crossorigin="anonymous"
     />
   </head>
-  <body class="mx-auto max-w-[720px] px-6 sm:px-5 pt-5 sm:pt-10 pb-0 sm:pb-10 min-h-screen flex flex-col relative">
-    {
-      pageType === "blog-post" && (
-        <div
-          id="reading-progress-track"
-          class="fixed top-0 left-0 z-50 h-[2px] w-full pointer-events-none"
-          style="background: color-mix(in srgb, var(--color-link) 18%, transparent); opacity: 0; transition: opacity 120ms ease;"
-          aria-hidden="true"
-        >
-          <div
-            id="reading-progress"
-            class="h-full"
-            style="width: 0%; background: var(--color-link); transition: width 70ms linear;"
-            aria-hidden="true"
-          ></div>
-        </div>
-      )
-    }
-
-    <header class="flex items-center justify-between motion-reveal" data-reveal style="--reveal-delay: 0ms;">
-        <a class="no-underline hover:no-underline flex items-center" href="/" transition:name="site-title">
-            <h1 class="mb-0 font-[550]">Waris Reshi</h1><sup><kbd class="text-[10px] font-mono select-none" style="color: var(--color-muted);">[w]</kbd></sup>
-        </a>
-
-        <nav class="flex items-center" transition:name="site-nav">
-            <a href="/archive/" class={`${linkClass("/archive/")} flex items-center transition-[opacity,transform] duration-200 hover:-translate-y-0.5`}>
-            Archive
-            <sup><kbd class="text-[10px] font-mono select-none" style="color: var(--color-muted);">[a]</kbd></sup>
-            </a>
-        </nav>
-    </header>
-
+  <body class="mx-auto max-w-[33rem] px-6 sm:px-5 pt-4 sm:pt-4 pb-0 sm:pb-10 min-h-screen flex flex-col relative">
     <main class="flex-1 motion-reveal" data-reveal style="--reveal-delay: 40ms;">
       <slot />
     </main>
-
-    <footer
-      data-reveal
-      class="pt-8 pb-4 flex items-center justify-between text-xs sm:text-sm motion-reveal"
-      style="--reveal-delay: 80ms; color: var(--color-muted);"
-      transition:name="site-footer"
-    >
-      <span class="whitespace-nowrap lowercaswe">&copy; {new Date().getFullYear()} WAR</span>
-        <div class="flex items-center gap-3 sm:gap-5">
-          <a
-            href="/rss.xml"
-            target="_blank"
-            class="no-underline hover:underline flex items-center gap-1.5"
-            title="Subscribe via RSS"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-3 h-3 sm:w-4 sm:h-4"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"
-              ></path>
-            </svg>
-            <span>RSS</span>
-          </a>
-          <a
-            href="https://github.com/wrsrsh"
-            target="_blank"
-            class="no-underline hover:underline flex items-center gap-1.5"
-            title="GitHub">Github</a
-          >
-          <a
-            href="https://www.linkedin.com/in/wrsrsh/"
-            target="_blank"
-            class="no-underline hover:underline flex items-center gap-1.5"
-            title="LinkedIn">LinkedIn</a
-          >
-        </div>
-    </footer>
     <script>
-      const updateReadingProgress = () => {
-        const bar = document.getElementById("reading-progress");
-        const track = document.getElementById("reading-progress-track");
-        if (!bar || !track) return;
-        const doc = document.documentElement;
-        const max = doc.scrollHeight - window.innerHeight;
-        const progress = max <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / max));
-        bar.style.width = `${progress * 100}%`;
-        track.style.opacity = progress > 0 ? "1" : "0";
-      };
-
       const applyMotionState = () => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         requestAnimationFrame(() => {
@@ -140,14 +45,6 @@ const linkClass = (path: string) =>
 
       document.body.classList.remove("motion-ready");
       applyMotionState();
-      updateReadingProgress();
-      window.addEventListener("scroll", updateReadingProgress, { passive: true });
-      window.addEventListener("resize", updateReadingProgress);
-      document.addEventListener("astro:page-load", () => {
-        document.body.classList.remove("motion-ready");
-        applyMotionState();
-        updateReadingProgress();
-      });
 
       document.addEventListener("keydown", (e) => {
         if (
@@ -156,9 +53,6 @@ const linkClass = (path: string) =>
           (e.target as HTMLElement).isContentEditable
         ) return;
 
-        if (e.key === "a") {
-          window.location.href = "/archive/";
-        }
         if (e.key === "w") {
           window.location.href = "/";
         }

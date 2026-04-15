@@ -1,50 +1,52 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
 import Layout from "../components/Layout.astro";
+import image1 from "../assets/image-1.png";
+import image2 from "../assets/image-2.png";
+import image3 from "../assets/image-3.png";
 
-const posts = (await getCollection("blog")).filter(
-  (post) => post.data.published === true
-).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).slice(0, 5)
+const images = [
+  { src: image1, rotate: "-9deg", z: "z-30" },
+  { src: image2, rotate: "4deg", z: "z-20" },
+  { src: image3, rotate: "12deg", z: "z-10" },
+];
 ---
 
 <Layout pageType="home">
-  <section class="prose pt-10" transition:name="home-content">
-    <p>Hey I am Waris, You might be here to check out <a href='https://asent.app' target="_blank">Asent</a> or some of my recent blogs:</p>
-    <ul class="list-none! py-0 -mt-2 pl-0!">
-      {
-        posts.map((post, i) => (
-          <li class="flex items-center motion-reveal" data-reveal style={`--reveal-delay: ${70 + i * 20}ms;`}>
-            <kbd class="text-[10px] mr-2 font-mono select-none not-prose" style="color: var(--color-muted);">[{i + 1}]</kbd>
-            <a href={`/post/${post.id}/`} class="motion-lift">{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ul>
+  <section
+    class="prose min-h-[calc(100vh-8rem)] flex flex-col justify-center"
+  >
+    <div class="flex items-center mb-12" aria-hidden="true">
+      {images.map((img, i) => (
+        <div
+          class:list={[
+            "group relative w-32 h-40 hover:z-50",
+            img.z,
+            i > 0 && "-ml-4",
+          ]}
+        >
+          <div
+            class:list={[
+              "absolute inset-0 origin-bottom rounded-2xl overflow-hidden shadow-lg bg-neutral-800",
+              "transition-[rotate,translate,scale,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+              "group-hover:rotate-0 group-hover:-translate-y-3 group-hover:scale-[1.06] group-hover:shadow-2xl",
+            ]}
+            style={`rotate: ${img.rotate};`}
+          >
+            <Image src={img.src} alt="" class="w-full h-full object-cover block scale-120" />
+          </div>
+        </div>
+      ))}
+    </div>
 
-    <p class="pt-8">
-        For the full blog list, check the archive page. For any other questions/feedback, feel free to reach out to me on <a href="https://twitter.com/wrsrsh" target="_blank">X</a> or <a href="mailto:hello@reshi.me">email</a>.
+    <h1 class="text-lg font-medium leading-tight m-0">waris reshi</h1>
+    <p class="m-0 mb-4 leading-tight text-[var(--color-muted)]">engineer, founder</p>
+
+    <p class="text-[var(--color-muted)]">
+      I work on <a href="https://asent.app" target="_blank">Asent</a>, AI infra for sales teams. Previously I ran a sales agency. I grew up in Kashmir and started building software when I was 8.
+    </p>
+    <p class="text-[var(--color-muted)]">
+      I keep a <a href="https://warism.substack.com" target="_blank">blog</a>. You can reach me at <a href="mailto:waris@asent.app">waris@asent.app</a>
     </p>
   </section>
-
-  <script>
-    document.addEventListener("keydown", (e) => {
-      if (
-        e.target instanceof HTMLInputElement ||
-        e.target instanceof HTMLTextAreaElement ||
-        (e.target as HTMLElement).isContentEditable
-      ) return;
-
-      const num = parseInt(e.key);
-      if (num >= 1 && num <= 9) {
-        const links = document.querySelectorAll<HTMLAnchorElement>("section ul li a");
-        const link = links[num - 1];
-        if (link) {
-          window.location.href = link.href;
-        }
-      }
-    });
-  </script>
 </Layout>

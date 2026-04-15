@@ -1,6 +1,6 @@
 {
 	"main": "dist/_worker.js/index.js",
-	"name": "blog",
+	"name": "warisreshi-personal-site",
   "compatibility_date": "2026-02-04",
   "compatibility_flags": [
     "nodejs_compat",

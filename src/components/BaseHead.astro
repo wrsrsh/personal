@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import { SEO } from 'astro-seo';
 import { SITE_TITLE, TWITTER_HANDLE } from '../consts';
 
 interface Props {
@@ -8,9 +7,7 @@ interface Props {
   description: string;
   image?: string;
   type?: 'website' | 'article';
-  pubDate?: Date;
-  updatedDate?: Date;
-  pageType?: 'home' | 'blog-post' | 'blog-list' | 'default';
+  pageType?: 'home' | 'default';
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -19,10 +16,8 @@ const siteURL = Astro.site?.href ?? 'https://reshi.me';
 const {
   title,
   description,
-  image = '/favicon.svg',
+  image = '/favicon.ico',
   type = 'website',
-  pubDate,
-  updatedDate,
   pageType = 'default',
 } = Astro.props;
 
@@ -55,37 +50,10 @@ const personSchema = {
   },
 };
 
-const articleSchema = pubDate
-  ? {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: title,
-      url: canonicalURL,
-      datePublished: pubDate.toISOString(),
-      ...(updatedDate && { dateModified: updatedDate.toISOString() }),
-      author: {
-        '@type': 'Person',
-        name: 'Waris Reshi',
-        url: siteURL,
-      },
-      publisher: {
-        '@type': 'Person',
-        name: 'Waris Reshi',
-        url: siteURL,
-      },
-      ...(image !== '/favicon.svg' && {
-        image: resolvedImage,
-      }),
-    }
-  : null;
-
 function getJsonLdScripts() {
   const schemas: object[] = [websiteSchema];
   if (pageType === 'home') {
     schemas.push(personSchema);
-  }
-  if (pageType === 'blog-post' && articleSchema) {
-    schemas.push(articleSchema);
   }
   return schemas;
 }
@@ -97,51 +65,23 @@ const jsonLdSchemas = getJsonLdScripts();
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
 <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%E2%9B%B0%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-<link rel="sitemap" href="/sitemap-index.xml" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  title={SITE_TITLE}
-  href={new URL('rss.xml', Astro.site)}
-/>
 <meta name="generator" content={Astro.generator} />
 <meta name="keywords" content="waris reshi, asent, srinagar, technology, ai, human performance, entrepreneurship, waris abass, waris, waris abass reshi" />
-
-<!-- SEO Meta Tags (via astro-seo) -->
-<SEO
-  title={title}
-  description={description}
-  canonical={canonicalURL}
-  openGraph={{
-    basic: {
-      title: title,
-      type: type,
-      image: resolvedImage,
-      url: canonicalURL,
-    },
-    optional: {
-      description: description,
-      siteName: SITE_TITLE,
-    },
-    ...(type === 'article' && pubDate
-      ? {
-          article: {
-            publishedTime: pubDate.toISOString(),
-            ...(updatedDate && { modifiedTime: updatedDate.toISOString() }),
-            authors: ['Waris Reshi'],
-          },
-        }
-      : {}),
-  }}
-  twitter={{
-    card: 'summary',
-    site: TWITTER_HANDLE,
-    creator: TWITTER_HANDLE,
-    title: title,
-    image: resolvedImage,
-    description: description,
-  }}
-/>
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:image" content={resolvedImage} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content={TWITTER_HANDLE} />
+<meta name="twitter:creator" content={TWITTER_HANDLE} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={resolvedImage} />
 
 <!-- JSON-LD Structured Data -->
 {jsonLdSchemas.map((schema) => (
