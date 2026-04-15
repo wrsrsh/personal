@@ -7,7 +7,6 @@ interface Props {
   description?: string;
   image?: string;
   type?: 'website' | 'article';
-  pageType?: 'home' | 'default';
 }
 
 const {
@@ -15,7 +14,6 @@ const {
   description = SITE_DESCRIPTION,
   image,
   type,
-  pageType,
 } = Astro.props;
 ---
 
@@ -23,7 +21,7 @@ const {
 <html lang="en"
   class="shadow-none ">
   <head>
-    <BaseHead title={title} description={description} image={image} type={type} pageType={pageType} />
+    <BaseHead title={title} description={description} image={image} type={type} />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css"

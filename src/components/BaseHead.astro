@@ -1,72 +1,30 @@
 ---
 import '../styles/global.css';
 import { SITE_TITLE, TWITTER_HANDLE } from '../consts';
+import ogImage from '../assets/image-1.png';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
   type?: 'website' | 'article';
-  pageType?: 'home' | 'default';
 }
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
-const siteURL = Astro.site?.href ?? 'https://reshi.me';
 
 const {
   title,
   description,
-  image = '/favicon.ico',
+  image = ogImage.src,
   type = 'website',
-  pageType = 'default',
 } = Astro.props;
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 const resolvedImage = new URL(image, Astro.url).href;
-
-// --- JSON-LD Structured Data ---
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: SITE_TITLE,
-  url: siteURL,
-};
-
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Waris Reshi',
-  url: siteURL,
-  sameAs: [
-    'https://github.com/wrsrsh',
-    'https://www.linkedin.com/in/wrsrsh/',
-    `https://x.com/${TWITTER_HANDLE.replace('@', '')}`,
-  ],
-  jobTitle: 'Co-founder',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Asent',
-    url: 'https://asent.app',
-  },
-};
-
-function getJsonLdScripts() {
-  const schemas: object[] = [websiteSchema];
-  if (pageType === 'home') {
-    schemas.push(personSchema);
-  }
-  return schemas;
-}
-
-const jsonLdSchemas = getJsonLdScripts();
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-<link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%E2%9B%B0%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
-<meta name="keywords" content="waris reshi, asent, srinagar, technology, ai, human performance, entrepreneurship, waris abass, waris, waris abass reshi" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
@@ -76,14 +34,9 @@ const jsonLdSchemas = getJsonLdScripts();
 <meta property="og:image" content={resolvedImage} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={SITE_TITLE} />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content={TWITTER_HANDLE} />
 <meta name="twitter:creator" content={TWITTER_HANDLE} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={resolvedImage} />
-
-<!-- JSON-LD Structured Data -->
-{jsonLdSchemas.map((schema) => (
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-))}
