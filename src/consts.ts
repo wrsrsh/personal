@@ -1,3 +1,3 @@
-export const SITE_TITLE = 'Waris Reshi';
-export const SITE_DESCRIPTION = "engineer, founder. building AI infra for sales teams at Asent. grew up in Kashmir, started building software at age 8.";
+export const SITE_TITLE = "Waris Reshi' blog";
+export const SITE_DESCRIPTION = "Engineer, founder. Building AI infra for sales teams at Asent.";
 export const TWITTER_HANDLE = '@wrsrsh';

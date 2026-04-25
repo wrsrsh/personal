@@ -1,0 +1,21 @@
+---
+import katex from 'katex';
+
+interface Props {
+  formula?: string;
+  inline?: boolean;
+  class?: string;
+}
+
+const { formula = '', inline = false, class: className } = Astro.props;
+const html = katex.renderToString(formula, {
+  throwOnError: false,
+  displayMode: !inline,
+});
+---
+
+{inline ? (
+  <span class={className} set:html={html} />
+) : (
+  <div class={className} set:html={html} />
+)}

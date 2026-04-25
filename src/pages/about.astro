@@ -1,0 +1,37 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../components/Layout.astro";
+import image1 from "../assets/image-1.webp";
+// import image2 from "../assets/image-2.webp";
+// import image3 from "../assets/image-3.webp";
+
+const images = [image1];
+---
+
+<Layout title="About">
+  <div class="post">
+    <header class="post-header">
+      <h1>About</h1>
+    </header>
+
+    <article class="post-content">
+      <div class="about-photos">
+        {images.map((img) => (
+          <Image src={img} alt="" width={1000} height={1000} />
+        ))}
+      </div>
+
+      <p>
+        I'm Waris Reshi — engineer, founder. I work at
+        <a href="https://asent.app" target="_blank">Asent</a>, building AI
+        infra for sales teams. Previously ran a sales agency. I grew up in
+        <a href="https://en.wikipedia.org/wiki/Kashmir" target="_blank">Kashmir</a> and started building software at age 8.
+      </p>
+
+      <p>
+      I keep a blog here. You can reach me at
+        <a href="mailto:waris@asent.app">waris@asent.app</a>.
+      </p>
+    </article>
+  </div>
+</Layout>

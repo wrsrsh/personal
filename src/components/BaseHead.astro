@@ -22,12 +22,15 @@ const resolvedImage = new URL(image, Astro.url).href;
 ---
 
 <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title={`${SITE_TITLE} posts`} />
+<meta name="generator" content={Astro.generator} />
+
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content={type} />
