@@ -17,7 +17,7 @@ const images = [image1];
     <article class="post-content">
       <div class="about-photos">
         {images.map((img) => (
-          <Image src={img} alt="" width={1000} height={1000} />
+          <Image src={img} alt="" width={1000} height={1000} loading="eager" fetchpriority="high" />
         ))}
       </div>
 

@@ -33,7 +33,7 @@ const desc = description ?? excerpt ?? "";
 
     {heroImage && (
       <div class="imgcap">
-        <Image src={heroImage} alt="" width={1020} />
+        <Image src={heroImage} alt="" width={1020} loading="eager" fetchpriority="high" />
       </div>
     )}
 
