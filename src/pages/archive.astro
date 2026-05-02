@@ -1,0 +1,93 @@
+---
+import Layout from "../components/Layout.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => p.data.published !== false)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
+  const y = String(post.data.pubDate.getFullYear());
+  (acc[y] ??= []).push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<Layout title="Archive">
+  <h3 class="archive-heading">Archive</h3>
+
+  <div class="archive-search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7"></circle>
+      <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+    </svg>
+    <input
+      id="archive-search"
+      type="text"
+      placeholder="Search posts"
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </div>
+
+  <p id="archive-empty" class="archive-empty" hidden>No matches.</p>
+
+  <div id="archive-list">
+    {years.map((year) => (
+      <section class="archive-year" data-year={year}>
+        <h4 class="archive-year-label">{year}</h4>
+        <ul class="archive-posts">
+          {byYear[year].map((post) => (
+            <li
+              class="archive-post"
+              data-title={post.data.title.toLowerCase()}
+              data-excerpt={(post.data.excerpt ?? "").toLowerCase()}
+            >
+              <span class="archive-date">
+                <FormattedDate date={post.data.pubDate} />
+              </span>
+              <a class="archive-link" href={`/post/${post.id}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <script is:inline>
+    (function () {
+      const input = document.getElementById("archive-search");
+      const empty = document.getElementById("archive-empty");
+      if (!input) return;
+
+      const posts = Array.from(document.querySelectorAll(".archive-post"));
+      const years = Array.from(document.querySelectorAll(".archive-year"));
+
+      const apply = () => {
+        const q = input.value.trim().toLowerCase();
+        let visible = 0;
+
+        posts.forEach((li) => {
+          const title = li.dataset.title || "";
+          const excerpt = li.dataset.excerpt || "";
+          const match = !q || title.includes(q) || excerpt.includes(q);
+          li.hidden = !match;
+          if (match) visible++;
+        });
+
+        years.forEach((sec) => {
+          const anyVisible = sec.querySelectorAll(".archive-post:not([hidden])").length > 0;
+          sec.hidden = !anyVisible;
+        });
+
+        if (empty) empty.hidden = visible !== 0;
+      };
+
+      input.addEventListener("input", apply);
+      input.focus();
+    })();
+  </script>
+</Layout>
