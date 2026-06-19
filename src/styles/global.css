@@ -84,9 +84,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Content */
 #content {
-  margin-left: 200px;
-  margin-top: 30px;
-  margin-right: 30px;
+  margin: 30px auto 0;
   max-width: 540px;
   padding-bottom: 60px;
 }
@@ -95,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
 }
-#content h2 { margin-top: 2em; }
+#content h2:not(.post-title) { margin-top: 2em; }
 
 #content p,
 #content ul,
@@ -122,8 +120,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-muted);
 }
 
-/* Blog list (home) — Sam Altman style */
-.posts { list-style: none !important; padding: 0; }
+/* Blog list (home) */
+.posts {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0;
+}
 .posts li {
   margin: 0 0 36px;
   padding: 0;
@@ -287,14 +289,46 @@ h1, h2, h3, h4, h5, h6 {
   margin: 18px 0;
 }
 
-.post-content ul,
-.post-content ol { padding-left: 20px; list-style-position: outside; }
-.post-content ul { list-style: disc outside; }
-.post-content ol { list-style: decimal outside; }
-.post-content li { margin: 4px 0; }
-.post-content li > p { margin: 0; }
-.post-content ul ul { list-style: circle outside; margin: 4px 0; }
-.post-content ul ul ul { list-style: square outside; }
+#content .post-content ul,
+#content .post-content ol {
+  padding-left: 0;
+  list-style: none;
+}
+#content .post-content ol {
+  counter-reset: post-list;
+}
+#content .post-content li {
+  position: relative;
+  padding-left: 1.5em;
+  margin: 8px 0;
+}
+#content .post-content ol > li {
+  counter-increment: post-list;
+}
+#content .post-content ol > li::before,
+#content .post-content ul > li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1em;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+#content .post-content ol > li::before {
+  content: counter(post-list) ".";
+}
+#content .post-content ul > li::before {
+  content: "•";
+  text-align: left;
+}
+#content .post-content li > p { margin: 0; }
+#content .post-content ul ul,
+#content .post-content ol ol,
+#content .post-content ul ol,
+#content .post-content ol ul {
+  margin: 4px 0 4px 1.25em;
+}
 
 .post-content pre,
 .post-content code {
@@ -387,20 +421,106 @@ img {
 
 /* Responsive */
 @media screen and (max-width: 700px) {
+  body {
+    font-size: 17px;
+    line-height: 1.68;
+  }
+
   #menu {
     position: static;
     width: auto;
-    margin: 20px 20px 10px;
+    margin: 22px 20px 12px;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  #menu .title {
+    font-size: 18px;
+    margin-bottom: 6px;
   }
   #menu ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 16px;
   }
   #menu li { display: inline-block; }
   #content {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 10px;
+    max-width: none;
+    margin: 28px 20px 0;
+    padding-bottom: 48px;
+  }
+
+  #content p,
+  #content ul,
+  #content ol {
+    line-height: 1.68;
+  }
+
+  #content ul,
+  #content ol {
+    padding-left: 20px;
+  }
+
+  .posts {
+    padding-left: 0 !important;
+  }
+  .posts li {
+    margin-bottom: 34px;
+  }
+  .posts .post-title {
+    font-size: 26px;
+    line-height: 1.18;
+    margin-bottom: 6px;
+  }
+  .posts .post-date {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .posts .post-excerpt {
+    font-size: 17px;
+    line-height: 1.68;
+    margin-bottom: 10px;
+  }
+  .posts .post-more {
+    font-size: 16px;
+  }
+
+  .post-header {
+    margin-bottom: 28px;
+  }
+  .post-header h1 {
+    font-size: 30px;
+    line-height: 1.16;
+  }
+  .post-header .meta,
+  .back-link {
+    font-size: 15px;
+  }
+
+  .post-content {
+    font-size: 17px;
+    line-height: 1.74;
+  }
+  .post-content > * {
+    margin-bottom: 1.15em;
+  }
+  .post-content h2 {
+    font-size: 23px;
+    margin-top: 34px;
+  }
+  .post-content h3 {
+    font-size: 20px;
+    margin-top: 28px;
+  }
+  .post-content h4 {
+    font-size: 17px;
+    margin-top: 24px;
+  }
+  .post-content ul,
+  .post-content ol {
+    padding-left: 0;
+  }
+  .post-content li {
+    margin: 12px 0;
   }
 }

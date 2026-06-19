@@ -34,7 +34,7 @@ function preview(body: string | undefined, maxChars = 200): string {
         <p class="post-date">
           <FormattedDate date={post.data.pubDate} />
         </p>
-        <p class="post-excerpt">{preview(post.body)}</p>
+        <p class="post-excerpt">{post.data.excerpt ?? preview(post.body)}</p>
         <p class="post-more">
           <a href={`/post/${post.id}/`}>Read More &rarr;</a>
         </p>
