@@ -1,27 +1,33 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../components/Layout.astro";
-import image1 from "../assets/image-1.webp";
-
-const images = [image1];
+import efImage from "../assets/about-ef.jpeg";
 ---
 
 <Layout title="About">
   <div class="about-photos">
-    {images.map((img) => (
-      <Image src={img} alt="" width={1000} height={1000} loading="eager" fetchpriority="high" />
-    ))}
+    <Image
+      src={efImage}
+      alt="Waris at EF Bangalore"
+      width={760}
+      loading="eager"
+      fetchpriority="high"
+    />
   </div>
 
   <p>
-  I'm Waris Reshi. engineer and founder. I work at
-    <a href="https://asent.app" target="_blank">Asent</a>, building AI infra for
-    sales teams. Previously ran a sales agency. I grew up in
+    I'm Waris Reshi. engineer and founder. I grew up in
     <a href="https://en.wikipedia.org/wiki/Kashmir" target="_blank">Kashmir</a>
     and started building software at age 8.
   </p>
 
   <p>
+    I'm now in the Spring '26 cohort of EF Bangalore, working on a consumer
+    companion product.
+  </p>
+
+  <p>
+    Previously ran a sales agency and built AI infrastructure for sales teams.
     I keep a blog here. You can reach me at
     <a href="mailto:waris@asent.app">waris@asent.app</a>.
   </p>

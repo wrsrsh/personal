@@ -397,9 +397,10 @@ img {
   flex-wrap: wrap;
 }
 .about-photos img {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 380px;
   margin: 12px 0;
 }
 
