@@ -121,6 +121,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Blog list (home) */
+.home-intro {
+  margin-bottom: 34px;
+}
+.home-intro h1,
+.page-heading {
+  color: var(--color-text-strong);
+  font-size: 24px;
+  line-height: 1.2;
+  margin-bottom: 12px !important;
+}
+.home-intro .profile-links {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.section-heading {
+  color: var(--color-text-strong);
+  font-size: 18px;
+  margin-bottom: 18px !important;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-border);
+}
 .posts {
   list-style: none !important;
   padding: 0 !important;
@@ -471,6 +492,19 @@ img {
     padding-left: 20px;
   }
 
+  .home-intro {
+    margin-bottom: 38px;
+  }
+  .home-intro h1,
+  .page-heading {
+    font-size: 30px;
+  }
+  .home-intro .profile-links {
+    font-size: 15px;
+  }
+  .section-heading {
+    font-size: 21px;
+  }
   .posts {
     padding-left: 0 !important;
   }

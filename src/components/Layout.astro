@@ -3,25 +3,41 @@ import BaseHead from "./BaseHead.astro";
 import { ClientRouter } from "astro:transitions";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
+type JsonLd = Record<string, unknown>;
+
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  type?: 'website' | 'article';
+  type?: 'website' | 'article' | 'profile';
+  publishedDate?: Date;
+  updatedDate?: Date;
+  structuredData?: JsonLd | JsonLd[];
 }
 
 const {
-  title = SITE_TITLE,
+  title = `${SITE_TITLE} — Engineer and Founder`,
   description = SITE_DESCRIPTION,
   image,
   type,
+  publishedDate,
+  updatedDate,
+  structuredData,
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={image} type={type} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishedDate={publishedDate}
+      updatedDate={updatedDate}
+      structuredData={structuredData}
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"

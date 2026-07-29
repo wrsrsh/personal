@@ -2,32 +2,59 @@
 import { Image } from "astro:assets";
 import Layout from "../components/Layout.astro";
 import efImage from "../assets/about-ef.jpeg";
+import { SITE_DESCRIPTION, SITE_URL } from "../consts";
+
+const structuredData = {
+  '@type': 'AboutPage',
+  '@id': `${SITE_URL}/about#page`,
+  url: `${SITE_URL}/about`,
+  name: 'About Waris Reshi',
+  description: SITE_DESCRIPTION,
+  inLanguage: 'en',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  mainEntity: { '@id': `${SITE_URL}/#person` },
+};
 ---
 
-<Layout title="About">
+<Layout
+  title="About Waris Reshi — Engineer and Founder"
+  description={SITE_DESCRIPTION}
+  type="profile"
+  image={efImage.src}
+  structuredData={structuredData}
+>
+  <h1 class="page-heading">About Waris Reshi</h1>
   <div class="about-photos">
     <Image
       src={efImage}
-      alt="Waris at EF Bangalore"
+      alt="Waris Reshi at Entrepreneur First in Bangalore"
       width={760}
       loading="eager"
       fetchpriority="high"
     />
   </div>
 
+  <h2>Who is Waris Reshi?</h2>
   <p>
-    I'm Waris Reshi. engineer and founder. I grew up in
-    <a href="https://en.wikipedia.org/wiki/Kashmir" target="_blank">Kashmir</a>
-    and started building software at age 8.
+    I'm Waris Reshi, an engineer and founder from
+    <a href="https://en.wikipedia.org/wiki/Kashmir" rel="external">Kashmir</a>.
+    I started building software at age 8 and now work on AI products and infrastructure.
   </p>
 
+  <h2>What is Waris working on?</h2>
   <p>
-    I'm now in the Spring '26 cohort of <a href="https://apply.joinef.com/" target="_blank">EF Bangalore</a>, working on an AI friend.
+    I'm in the Spring '26 cohort of
+    <a href="https://apply.joinef.com/" rel="external">Entrepreneur First Bangalore</a>,
+    building <a href="https://talk2hug.com" rel="external">Hug</a>, an AI friend.
+    Previously, I ran a sales agency and built AI infrastructure for sales teams.
   </p>
 
+  <h2>Where can I find Waris online?</h2>
   <p>
-    Previously ran a sales agency and built AI infrastructure for sales teams.
-    I keep a blog here. You can reach me at
-    <a href="mailto:waris@reshi.me">waris@reshi.me</a>.
+    Read my writing in the <a href="/archive">archive</a>, find me on
+    <a href="https://www.linkedin.com/in/wrsrsh" rel="me external">LinkedIn</a>,
+    <a href="https://x.com/wrsrsh" rel="me external">X</a>, or
+    <a href="https://github.com/wrsrsh" rel="me external">GitHub</a>.
+    You can email me at <a href="mailto:waris@reshi.me">waris@reshi.me</a>.
   </p>
 </Layout>

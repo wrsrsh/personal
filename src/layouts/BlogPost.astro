@@ -3,14 +3,40 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "../components/Layout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import { Image } from "astro:assets";
+import { SITE_TITLE, SITE_URL } from "../consts";
 
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, excerpt, pubDate, updatedDate, heroImage } = Astro.props;
-const desc = description ?? excerpt ?? "";
+const desc = description ?? excerpt ?? `Read ${title}, an article by Waris Reshi.`;
+const postURL = new URL(Astro.url.pathname, SITE_URL).href;
+const imageURL = heroImage ? new URL(heroImage.src, SITE_URL).href : undefined;
+const structuredData = {
+  '@type': 'BlogPosting',
+  '@id': `${postURL}#article`,
+  url: postURL,
+  headline: title,
+  description: desc,
+  image: imageURL,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  inLanguage: 'en',
+  mainEntityOfPage: postURL,
+  author: { '@id': `${SITE_URL}/#person` },
+  publisher: { '@id': `${SITE_URL}/#person` },
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+};
 ---
 
-<Layout title={title} description={desc} image={heroImage?.src} type="article">
+<Layout
+  title={`${title} — ${SITE_TITLE}`}
+  description={desc}
+  image={heroImage?.src}
+  type="article"
+  publishedDate={pubDate}
+  updatedDate={updatedDate}
+  structuredData={structuredData}
+>
   <div
     id="reading-progress"
     role="progressbar"

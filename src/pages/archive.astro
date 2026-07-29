@@ -2,6 +2,19 @@
 import Layout from "../components/Layout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import { getCollection } from "astro:content";
+import { SITE_URL } from "../consts";
+
+const archiveDescription = "Browse articles by Waris Reshi about software, startups, artificial intelligence, and personal experiments.";
+const structuredData = {
+  '@type': 'CollectionPage',
+  '@id': `${SITE_URL}/archive#page`,
+  url: `${SITE_URL}/archive`,
+  name: 'Waris Reshi’s Writing Archive',
+  description: archiveDescription,
+  inLanguage: 'en',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  author: { '@id': `${SITE_URL}/#person` },
+};
 
 const posts = (await getCollection("blog"))
   .filter((p) => p.data.published !== false)
@@ -16,8 +29,12 @@ const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
 const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<Layout title="Archive">
-  <h3 class="archive-heading">Archive</h3>
+<Layout
+  title="Writing Archive — Waris Reshi"
+  description={archiveDescription}
+  structuredData={structuredData}
+>
+  <h1 class="archive-heading">Writing Archive</h1>
 
   <div class="archive-search-wrap">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

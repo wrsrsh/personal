@@ -1,0 +1,26 @@
+# Waris Reshi
+
+> Waris Reshi is an engineer and founder from Kashmir. He is currently building Hug, an AI friend, at Entrepreneur First Bangalore.
+
+This is the official personal website of Waris Reshi. It contains his biography and original writing about software, startups, artificial intelligence, and personal experiments.
+
+## Canonical pages
+
+- [Home and latest writing](https://reshi.me/)
+- [About Waris Reshi](https://reshi.me/about)
+- [Writing archive](https://reshi.me/archive)
+- [Atom feed](https://reshi.me/feed.xml)
+
+## Current project
+
+- [Hug](https://talk2hug.com): an AI friend being built by Waris Reshi.
+
+## Verified public profiles
+
+- [LinkedIn](https://www.linkedin.com/in/wrsrsh)
+- [X](https://x.com/wrsrsh)
+- [GitHub](https://github.com/wrsrsh)
+
+## Contact
+
+- Email: waris@reshi.me
