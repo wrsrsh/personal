@@ -2,19 +2,6 @@
 import Layout from "../components/Layout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import { getCollection } from "astro:content";
-import efImage from "../assets/about-ef.jpeg";
-import { SITE_DESCRIPTION, SITE_URL } from "../consts";
-
-const structuredData = {
-  '@type': 'ProfilePage',
-  '@id': `${SITE_URL}/#profile-page`,
-  url: SITE_URL,
-  name: 'Waris Reshi — Engineer and Founder',
-  description: SITE_DESCRIPTION,
-  inLanguage: 'en',
-  isPartOf: { '@id': `${SITE_URL}/#website` },
-  mainEntity: { '@id': `${SITE_URL}/#person` },
-};
 
 const posts = (await getCollection("blog"))
   .filter((p) => p.data.published !== false)
@@ -37,26 +24,7 @@ function preview(body: string | undefined, maxChars = 200): string {
 }
 ---
 
-<Layout type="profile" image={efImage.src} structuredData={structuredData}>
-  <header class="home-intro">
-    <h1>Waris Reshi</h1>
-    <p>
-      I'm an engineer and founder from Kashmir, currently building
-      <a href="https://talk2hug.com" rel="external">Hug</a>, an AI friend, at EF Bangalore.
-      I write about software, startups, AI, and the ideas I'm exploring.
-    </p>
-    <p class="profile-links">
-      <a href="/about">More about me</a>
-      <span aria-hidden="true"> · </span>
-      <a href="https://www.linkedin.com/in/wrsrsh" rel="me external">LinkedIn</a>
-      <span aria-hidden="true"> · </span>
-      <a href="https://x.com/wrsrsh" rel="me external">X</a>
-      <span aria-hidden="true"> · </span>
-      <a href="https://github.com/wrsrsh" rel="me external">GitHub</a>
-    </p>
-  </header>
-
-  <h2 class="section-heading">Writing</h2>
+<Layout>
   <ul class="posts">
     {posts.map((post) => (
       <li>
