@@ -9,7 +9,11 @@ const posts = (await getCollection("blog"))
 
 function preview(body: string | undefined, maxChars = 200): string {
   if (!body) return "";
-  const firstPara = body.split(/\n\s*\n/).map(s => s.trim()).find(Boolean) ?? "";
+  const firstPara =
+    body
+      .split(/\n\s*\n/)
+      .map((s) => s.trim())
+      .find(Boolean) ?? "";
   const stripped = firstPara
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
@@ -26,23 +30,24 @@ function preview(body: string | undefined, maxChars = 200): string {
 
 <Layout>
   <ul class="posts">
-    {posts.map((post) => (
-      <li>
-        <h2 class="post-title">
-          <a href={`/post/${post.id}/`}>{post.data.title}</a>
-        </h2>
-        <p class="post-date">
-          <FormattedDate date={post.data.pubDate} />
-        </p>
-        <p class="post-excerpt">{post.data.excerpt ?? preview(post.body)}</p>
-        <p class="post-more">
-          <a href={`/post/${post.id}/`}>Read More &rarr;</a>
-        </p>
-      </li>
-    ))}
+    {
+      posts.map((post) => (
+        <li>
+          <h2 class="post-title">
+            <a href={`/post/${post.id}/`}>{post.data.title}</a>
+          </h2>
+          <p class="post-date">
+            <FormattedDate date={post.data.pubDate} />
+          </p>
+          <p class="post-excerpt">{post.data.excerpt ?? preview(post.body)}</p>
+        </li>
+      ))
+    }
   </ul>
 
-  {posts.length === 0 && (
-    <p style="color: var(--color-muted);">No posts yet.</p>
-  )}
+  {
+    posts.length === 0 && (
+      <p style="color: var(--color-muted);">No posts yet.</p>
+    )
+  }
 </Layout>
