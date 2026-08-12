@@ -276,10 +276,16 @@ h1, h2, h3, h4, h5, h6 {
 .back-link a { color: var(--color-link); }
 
 .post-header { margin-bottom: 24px; }
-.post-header h1 {
+.post-header h1,
+.post-header h2 {
   font-size: 27.6px;
   font-weight: 400;
   line-height: 1.2;
+}
+.feed-post + .feed-post {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
 }
 .post-header .meta {
   font-size: 14.95px;
