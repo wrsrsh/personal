@@ -148,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 .posts li {
-  margin: 0 0 39.6px;
+  margin: 0 0 43.56px;
   padding: 0;
 }
 .posts .post-title {
@@ -509,7 +509,7 @@ img {
     padding-left: 0 !important;
   }
   .posts li {
-    margin-bottom: 37.4px;
+    margin-bottom: 41.14px;
   }
   .posts .post-title {
     font-size: 29.9px;
