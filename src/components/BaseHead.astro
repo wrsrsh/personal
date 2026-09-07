@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
 import { PROJECT_URL, SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SOCIAL_LINKS, TWITTER_HANDLE } from '../consts';
 import ogImage from '../assets/image-1.webp';
 import personImage from '../assets/about-ef.jpeg';
@@ -9,7 +10,7 @@ type JsonLd = Record<string, unknown>;
 interface Props {
   title: string;
   description: string;
-  image?: string;
+  image?: ImageMetadata;
   type?: 'website' | 'article' | 'profile';
   publishedDate?: Date;
   updatedDate?: Date;
@@ -19,16 +20,35 @@ interface Props {
 const {
   title,
   description,
-  image = ogImage.src,
+  image = ogImage,
   type = 'website',
   publishedDate,
   updatedDate,
   structuredData = [],
 } = Astro.props;
 
+// Social crawlers (WhatsApp especially) will not render webp, and they skip
+// large files. Emit a JPEG at the standard 1.91:1 open-graph size. Going
+// through getImage() also guarantees the asset is actually written to the
+// build — referencing ImageMetadata.src directly does not emit anything.
+const ogAsset = await getImage({
+  src: image,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  format: 'jpeg',
+  quality: 80,
+});
+const personAsset = await getImage({
+  src: personImage,
+  width: 600,
+  format: 'jpeg',
+  quality: 80,
+});
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_URL).href;
-const resolvedImage = new URL(image, Astro.site ?? Astro.url).href;
-const resolvedPersonImage = new URL(personImage.src, Astro.site ?? Astro.url).href;
+const resolvedImage = new URL(ogAsset.src, Astro.site ?? Astro.url).href;
+const resolvedPersonImage = new URL(personAsset.src, Astro.site ?? Astro.url).href;
 const additionalSchemas = Array.isArray(structuredData) ? structuredData : [structuredData];
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -95,6 +115,11 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
 <meta property="og:description" content={description} />
 <meta property="og:type" content={type} />
 <meta property="og:image" content={resolvedImage} />
+<meta property="og:image:secure_url" content={resolvedImage} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content="en_US" />
