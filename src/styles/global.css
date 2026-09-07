@@ -40,7 +40,7 @@ html, body { min-height: 100%; }
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 16.1px;
+  font-size: 18.03px;
   line-height: 1.55;
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -102,10 +102,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.55;
 }
 
-#content p { margin-bottom: 1em; }
+#content p { margin-bottom: 1.55em; }
 
 #content ul,
-#content ol { margin-bottom: 1em; padding-left: 22px; }
+#content ol { margin-bottom: 1.55em; padding-left: 22px; }
 #content ul { list-style: disc outside; }
 #content ol { list-style: decimal outside; }
 #content li { margin-bottom: 0.4em; }
@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 .byline,
 .byline a,
 .note {
-  font-size: 12.65px;
+  font-size: 14.17px;
   color: var(--color-muted);
 }
 
@@ -127,17 +127,17 @@ h1, h2, h3, h4, h5, h6 {
 .home-intro h1,
 .page-heading {
   color: var(--color-text-strong);
-  font-size: 27.6px;
+  font-size: 30.91px;
   line-height: 1.2;
   margin-bottom: 12px !important;
 }
 .home-intro .profile-links {
-  font-size: 14.95px;
+  font-size: 16.74px;
   margin-bottom: 0;
 }
 .section-heading {
   color: var(--color-text-strong);
-  font-size: 20.7px;
+  font-size: 23.18px;
   margin-bottom: 18px !important;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--color-border);
@@ -153,14 +153,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .posts .post-title {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 25.3px;
+  font-size: 28.34px;
   font-weight: 400;
   line-height: 1.2;
   margin: 0 0 2px;
 }
 .posts .post-title a { color: var(--color-link); }
 .posts .post-date {
-  font-size: 14.95px;
+  font-size: 16.74px;
   color: var(--color-muted);
   margin: 0 0 6px;
 }
@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Archive */
 .archive-heading {
-  font-size: 25.3px;
+  font-size: 28.34px;
   font-weight: 400;
   margin: 0 0 16px;
 }
@@ -198,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   width: 100%;
   font-family: inherit;
-  font-size: 16.1px;
+  font-size: 18.03px;
   line-height: 1.4;
   padding: 9px 12px 9px 34px;
   border: 1px solid var(--color-input-border);
@@ -223,13 +223,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .archive-empty {
   color: var(--color-muted);
-  font-size: 14.95px;
+  font-size: 16.74px;
   margin: 0 0 12px;
 }
 
 .archive-year { margin: 0 0 26px; }
 .archive-year-label {
-  font-size: 13.8px;
+  font-size: 15.46px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-muted);
@@ -254,7 +254,7 @@ h1, h2, h3, h4, h5, h6 {
   flex: 0 0 auto;
   width: 100px;
   color: var(--color-muted);
-  font-size: 14.95px;
+  font-size: 16.74px;
   font-variant-numeric: tabular-nums;
 }
 .archive-link {
@@ -265,20 +265,20 @@ h1, h2, h3, h4, h5, h6 {
 
 @media screen and (max-width: 700px) {
   .archive-post { gap: 10px; }
-  .archive-date { width: 80px; font-size: 13.8px; }
+  .archive-date { width: 80px; font-size: 15.46px; }
 }
 
 /* Post */
 .back-link {
-  font-size: 14.95px;
+  font-size: 16.74px;
   margin: 0 0 18px;
 }
 .back-link a { color: var(--color-link); }
 
-.post-header { margin-bottom: 24px; }
+.post-header { margin-bottom: 30px; }
 .post-header h1,
 .post-header h2 {
-  font-size: 27.6px;
+  font-size: 30.91px;
   font-weight: 400;
   line-height: 1.2;
 }
@@ -288,13 +288,13 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 1px solid var(--color-border);
 }
 .post-header .meta {
-  font-size: 14.95px;
+  font-size: 16.74px;
   color: var(--color-muted);
   margin-top: 6px;
 }
 
 .post-content {}
-.post-content > * { margin: 0 0 1em; }
+.post-content > * { margin: 0 0 1.55em; }
 
 .post-content h1,
 .post-content h2,
@@ -304,9 +304,9 @@ h1, h2, h3, h4, h5, h6 {
   margin: 28px 0 10px;
   line-height: 1.2;
 }
-.post-content h2 { font-size: 23px; }
-.post-content h3 { font-size: 19.55px; }
-.post-content h4 { font-size: 17.25px; }
+.post-content h2 { font-size: 25.76px; }
+.post-content h3 { font-size: 21.9px; }
+.post-content h4 { font-size: 19.32px; }
 
 .post-content blockquote {
   border-left: 3px solid var(--color-border);
@@ -363,7 +363,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-code-bg);
   padding: 8px 12px;
   border-radius: 3px;
-  font-size: 14.95px;
+  font-size: 16.74px;
   overflow: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
@@ -392,17 +392,18 @@ img {
 .imgcap img {
   max-width: 100%;
   height: auto;
-  margin: 12px 0;
+  margin: 0;
   display: block;
 }
 .imgcap {
   color: var(--color-muted);
-  font-size: 14.95px;
+  font-size: 16.74px;
   text-align: center;
+  margin: 34px 0 52px;
 }
 
 .post-content img {
-  margin: 12px 0;
+  margin: 32px 0;
   max-width: 100%;
   height: auto;
   display: block;
@@ -460,7 +461,7 @@ img {
   }
 
   body {
-    font-size: 19.55px;
+    font-size: 21.9px;
     line-height: 1.68;
   }
 
@@ -468,11 +469,11 @@ img {
     position: static;
     width: auto;
     margin: 22px var(--mobile-page-gutter) 12px;
-    font-size: 19.55px;
+    font-size: 21.9px;
     line-height: 1.5;
   }
   #menu .title {
-    font-size: 20.7px;
+    font-size: 23.18px;
     margin-bottom: 6px;
   }
   #menu ul {
@@ -503,13 +504,13 @@ img {
   }
   .home-intro h1,
   .page-heading {
-    font-size: 34.5px;
+    font-size: 38.64px;
   }
   .home-intro .profile-links {
-    font-size: 17.25px;
+    font-size: 19.32px;
   }
   .section-heading {
-    font-size: 24.15px;
+    font-size: 27.05px;
   }
   .posts {
     padding-left: 0 !important;
@@ -518,53 +519,53 @@ img {
     margin-bottom: 156px;
   }
   .posts .post-title {
-    font-size: 29.9px;
+    font-size: 33.49px;
     line-height: 1.18;
     margin-bottom: 3px;
   }
   .posts .post-date {
-    font-size: 17.25px;
+    font-size: 19.32px;
     line-height: 1.4;
     margin-bottom: 6px;
   }
   .posts .post-excerpt {
-    font-size: 19.55px;
+    font-size: 21.9px;
     line-height: 1.68;
     margin-bottom: 10px;
   }
   .posts .post-more {
-    font-size: 18.4px;
+    font-size: 20.61px;
   }
 
   .post-header {
-    margin-bottom: 28px;
+    margin-bottom: 34px;
   }
   .post-header h1 {
-    font-size: 34.5px;
+    font-size: 38.64px;
     line-height: 1.16;
   }
   .post-header .meta,
   .back-link {
-    font-size: 17.25px;
+    font-size: 19.32px;
   }
 
   .post-content {
-    font-size: 19.55px;
+    font-size: 21.9px;
     line-height: 1.74;
   }
   .post-content > * {
-    margin-bottom: 1.15em;
+    margin-bottom: 1.6em;
   }
   .post-content h2 {
-    font-size: 26.45px;
+    font-size: 29.62px;
     margin-top: 34px;
   }
   .post-content h3 {
-    font-size: 23px;
+    font-size: 25.76px;
     margin-top: 28px;
   }
   .post-content h4 {
-    font-size: 19.55px;
+    font-size: 21.9px;
     margin-top: 24px;
   }
   .post-content ul,
