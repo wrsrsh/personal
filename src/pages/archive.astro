@@ -63,9 +63,7 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
               data-title={post.data.title.toLowerCase()}
               data-excerpt={(post.data.excerpt ?? "").toLowerCase()}
             >
-              <span class="archive-date">
-                <FormattedDate date={post.data.pubDate} />
-              </span>
+              <span class="archive-date"><FormattedDate date={post.data.pubDate} /></span>
               <a class="archive-link" href={`/post/${post.id}/`}>{post.data.title}</a>
             </li>
           ))}

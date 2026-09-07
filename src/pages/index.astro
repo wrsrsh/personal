@@ -20,12 +20,7 @@ const renderedPosts = await Promise.all(
         <section class="feed-post">
           <header class="post-header">
             {index === 0 ? <h1>{post.data.title}</h1> : <h2>{post.data.title}</h2>}
-            <p class="meta">
-              <FormattedDate date={post.data.pubDate} />
-              {post.data.updatedDate && (
-                <span> &bull; updated <FormattedDate date={post.data.updatedDate} /></span>
-              )}
-            </p>
+            <p class="meta"><FormattedDate date={post.data.pubDate} />{post.data.updatedDate && (<span> &bull; updated <FormattedDate date={post.data.updatedDate} /></span>)}</p>
           </header>
 
           {post.data.heroImage && (
