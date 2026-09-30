@@ -25,6 +25,7 @@ export const GET: APIRoute = async () => {
     { url: `${SITE_URL}/`, lastModified: undefined },
     { url: `${SITE_URL}/about`, lastModified: undefined },
     { url: `${SITE_URL}/archive`, lastModified: undefined },
+    { url: `${SITE_URL}/quotes`, lastModified: undefined },
     ...posts,
   ];
 

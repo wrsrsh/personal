@@ -1,0 +1,59 @@
+---
+import Layout from "../components/Layout.astro";
+import { quotes } from "../data/quotes";
+---
+
+<Layout
+  title="Quotes — Waris Reshi"
+  description="A collection of quotes I want to keep and come back to."
+>
+  <h1 class="page-heading">Quotes</h1>
+  <p>A collection of words I want to come back to.</p>
+
+  {quotes.length === 0 ? (
+    <p class="quotes-empty">No quotes collected yet.</p>
+  ) : (
+    <div class="quotes-list">
+      {quotes.map((quote) => (
+        <figure class="quote">
+          <blockquote cite={quote.url}>
+            <p>{quote.text}</p>
+          </blockquote>
+          <figcaption>
+            — {quote.author}
+            {quote.source && <>, <cite>{quote.url ? <a href={quote.url}>{quote.source}</a> : quote.source}</cite></>}
+            {!quote.source && quote.url && <> · <a href={quote.url}>Source</a></>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )}
+</Layout>
+
+<style>
+  .quote {
+    margin: 0;
+    padding: 26px 0;
+    border-top: 1px solid var(--color-border);
+    overflow-wrap: anywhere;
+  }
+
+  .quote blockquote {
+    border-left: 3px solid var(--color-border);
+    padding-left: 18px;
+  }
+
+  .quote blockquote p {
+    margin-bottom: 12px !important;
+    white-space: pre-line;
+  }
+
+  .quote figcaption {
+    padding-left: 21px;
+    font-size: 16.74px;
+  }
+
+  .quotes-empty {
+    font-size: 16.74px;
+  }
+</style>
