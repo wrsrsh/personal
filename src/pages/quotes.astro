@@ -7,9 +7,6 @@ import { quotes } from "../data/quotes";
   title="Quotes — Waris Reshi"
   description="A collection of quotes I want to keep and come back to."
 >
-  <h1 class="page-heading">Quotes</h1>
-  <p>A collection of words I want to come back to.</p>
-
   {quotes.length === 0 ? (
     <p class="quotes-empty">No quotes collected yet.</p>
   ) : (
@@ -32,25 +29,18 @@ import { quotes } from "../data/quotes";
 
 <style>
   .quote {
-    margin: 0;
-    padding: 26px 0;
-    border-top: 1px solid var(--color-border);
+    margin: 0 0 24px;
     overflow-wrap: anywhere;
   }
 
-  .quote blockquote {
-    border-left: 3px solid var(--color-border);
-    padding-left: 18px;
-  }
-
   .quote blockquote p {
-    margin-bottom: 12px !important;
+    margin-bottom: 6px !important;
     white-space: pre-line;
   }
 
   .quote figcaption {
-    padding-left: 21px;
     font-size: 16.74px;
+    color: var(--color-muted);
   }
 
   .quotes-empty {

@@ -2,32 +2,19 @@
 import { Image } from "astro:assets";
 import Layout from "../components/Layout.astro";
 import efImage from "../assets/about-ef.jpeg";
+import { Content } from "../content/about.mdx";
 ---
 
 <Layout title="About">
-  <div class="about-photos">
-    <Image
-      src={efImage}
-      alt="Waris at EF Bangalore"
-      width={760}
-      loading="eager"
-      fetchpriority="high"
-    />
-  </div>
+    <div class="about-photos">
+        <Image
+            src={efImage}
+            alt="Waris at EF Bangalore"
+            width={760}
+            loading="eager"
+            fetchpriority="high"
+        />
+    </div>
 
-  <p>
-    I'm Waris Reshi. engineer and founder. I grew up in
-    <a href="https://en.wikipedia.org/wiki/Kashmir" target="_blank">Kashmir</a>
-    and started building software at age 8.
-  </p>
-
-  <p>
-    I'm now in the Spring '26 cohort of <a href="https://apply.joinef.com/" target="_blank">EF Bangalore</a>, working on an AI friend.
-  </p>
-
-  <p>
-    Previously ran a sales agency and built AI infrastructure for sales teams.
-    I keep a blog here. You can reach me at
-    <a href="mailto:waris@reshi.me">waris@reshi.me</a>.
-  </p>
+    <Content />
 </Layout>

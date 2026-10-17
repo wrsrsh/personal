@@ -110,6 +110,8 @@ h1, h2, h3, h4, h5, h6 {
 #content ol { list-style: decimal outside; }
 #content li { margin-bottom: 0.4em; }
 #content li::marker { color: var(--color-muted); }
+#content li > ul { margin: 0.4em 0 0; }
+#content > ul:not([class]) > li { margin-bottom: 1.1em; }
 
 #content p.notop { margin-top: 0; }
 
@@ -172,15 +174,9 @@ h1, h2, h3, h4, h5, h6 {
 .posts .post-more a { color: var(--color-link); }
 
 /* Archive */
-.archive-heading {
-  font-size: 28.34px;
-  font-weight: 400;
-  margin: 0 0 16px;
-}
-
 .archive-search-wrap {
   position: relative;
-  margin: 18px 0 36px;
+  margin: 0 0 36px;
 }
 
 .archive-search-wrap svg {
@@ -432,6 +428,14 @@ img {
   margin: 12px 0;
 }
 
+.about-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 22px 0 26px;
+  border-radius: 6px;
+}
+
 /* Reading progress (blog posts) */
 #reading-progress {
   position: fixed;
@@ -454,8 +458,8 @@ img {
 /* Math (KaTeX) */
 .katex-display { overflow-x: auto; overflow-y: hidden; }
 
-/* Responsive */
-@media screen and (max-width: 700px) {
+/* Responsive: phones and tablets (iPad portrait up to 1024px) */
+@media screen and (max-width: 1024px) {
   :root {
     --mobile-page-gutter: min(6vw, 28px);
   }
@@ -574,5 +578,28 @@ img {
   }
   .post-content li {
     margin: 12px 0;
+  }
+
+  .about-photos img {
+    max-width: 100%;
+  }
+}
+
+/* Tablets: keep the single column at a readable width */
+@media screen and (min-width: 701px) and (max-width: 1024px) {
+  #menu,
+  #content {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #menu {
+    padding: 0 var(--mobile-page-gutter);
+    box-sizing: content-box;
+  }
+  #content {
+    padding-left: var(--mobile-page-gutter);
+    padding-right: var(--mobile-page-gutter);
+    box-sizing: content-box;
   }
 }

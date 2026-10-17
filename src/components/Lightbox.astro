@@ -1,0 +1,76 @@
+---
+// Opens any <a data-lightbox href="full-image-url"> in a full-screen overlay.
+// Without JS the link still opens the full-resolution image directly.
+---
+
+<script>
+  let dialog: HTMLDialogElement | null = null;
+
+  function getDialog() {
+    if (dialog && document.body.contains(dialog)) return dialog;
+    dialog = document.createElement("dialog");
+    dialog.className = "lightbox";
+    dialog.innerHTML = '<img alt="" />';
+    dialog.addEventListener("click", () => dialog!.close());
+    dialog.addEventListener("close", () => {
+      document.documentElement.classList.remove("lightbox-open");
+    });
+    document.body.appendChild(dialog);
+    return dialog;
+  }
+
+  document.addEventListener("click", (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = (event.target as Element).closest<HTMLAnchorElement>("a[data-lightbox]");
+    if (!link) return;
+    event.preventDefault();
+
+    const d = getDialog();
+    const img = d.querySelector("img")!;
+    img.src = link.href;
+    img.alt = link.querySelector("img")?.alt ?? "";
+    document.documentElement.classList.add("lightbox-open");
+    d.showModal();
+  }, true);
+</script>
+
+<style is:global>
+  a[data-lightbox] {
+    display: block;
+    cursor: zoom-in;
+  }
+
+  .lightbox {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 2vmin;
+    border: 0;
+    background: transparent;
+    cursor: zoom-out;
+  }
+  .lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.97);
+  }
+  .lightbox img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  html.lightbox-open {
+    overflow: hidden;
+  }
+</style>
