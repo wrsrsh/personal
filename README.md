@@ -1,5 +1,7 @@
 This is my personal site built with [Astro](https://astro.build) and deployed as a [worker](https://workers.cloudflare.com/).
 
+Use Node 24.22.1 (see `.node-version`) and pnpm 11.25.0. Install with `pnpm install --frozen-lockfile` and build with `pnpm build`. The pnpm lockfile is the dependency source of truth; the old Bun lockfile was removed during the security update.
+
 ---
 
 The design is inspired by [karpathy's github blog](https://karpathy.github.io) and [patrick's website](https://patrickcollison.com/about)
